@@ -22,7 +22,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('books/', books.views.index),
     path('reviews/', reviews.views.index),
-    path('books/create/', books.views.create_book),
-    path('books/create_author', books.views.create_author)
+    path('books/create/', books.views.create_book, name='create_book'),
+    path('books/create_author', books.views.create_author, name='create_author'),
+    path('books/update_book/<dataid>', books.views.update_book, name='update_book_route'),
+    path('books/update_author/<dataid>', books.views.update_author, name='update_author_route')
 ]
 
+ 

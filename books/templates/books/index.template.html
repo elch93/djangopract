@@ -12,17 +12,18 @@
 <body>
     <h1>Books</h1>
     <p>
-        Here you can see all the books we have.
+        <a href="{% url 'create_book' %}">Create Book</a>
     </p>
     <ul>
         {% for i in books %}
-        <li>{{i.title}}</li>
+        <li>{{i.title}} <a href="{% url 'update_book_route' dataid=i.id %}">Edit</a></li>
         {% endfor %}
     </ul>
     <h1>Authors</h1>
+    <a href="{% url 'create_author' %}">Create Author</a>
     <ul>
         {% for i in authors %}
-        <li>{{i.first_name}}</li>
+        <li>{{i.first_name}} <a href="{% url 'update_author_route' dataid=i.id %}">Edit</a></li>
         {% endfor %}
     </ul>
     
