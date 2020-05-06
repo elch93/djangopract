@@ -16,14 +16,14 @@
     </p>
     <ul>
         {% for i in books %}
-        <li>{{i.title}} <a href="{% url 'update_book_route' dataid=i.id %}">Edit</a></li>
+        <li>{{i.title}} <a href="{% url 'update_book_route' dataid=i.id %}">Edit</a> <a href="{% url 'delete_book_route' dataid=i.id %}">Delete</a></li>
         {% endfor %}
     </ul>
     <h1>Authors</h1>
     <a href="{% url 'create_author' %}">Create Author</a>
     <ul>
         {% for i in authors %}
-        <li>{{i.first_name}} <a href="{% url 'update_author_route' dataid=i.id %}">Edit</a></li>
+        <li>{{i.first_name}} <a href="{% url 'update_author_route' dataid=i.id %}">Edit</a> <a href="{% url 'delete_author_route' dataid=i.id %}">Delete</a></li>
         {% endfor %}
     </ul>
     
