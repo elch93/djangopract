@@ -33,8 +33,8 @@ class Book(models.Model):
     title = models.CharField(blank=False, max_length=255)
     ISBN = models.CharField(blank=False, max_length=255)
     desc = models.TextField(blank=False)
-    genre = models.ForeignKey(Genre, on_delete=models.CharField)
-    category = models.ForeignKey(Category, on_delete=models.CharField)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tags)
     author = models.ManyToManyField(Author)
 

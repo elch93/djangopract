@@ -1,19 +1,22 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-</head>
-<body>
+{% extends 'base.template.html' %}
+{% block content %}
     <h1>Reviews</h1>
     <p>
         Here you can see all the reviews we have.
     </p>
-    
-</body>
-</html>
+    {% if request.user.is_authenticated  %}
+    <p>Welcome {{request.user}}</p>
+    {% else %}
+    <p>Please <a href="../accounts/login">Login</a></p>
+    {%endif%}
+    {% if request.user.is_authenticated  %}
+    <p>
+        <a href="{% url 'create_review' %}">Create Review</a>
+    </p>
+    <ul>
+        {% for i in reviews %}
+        <li>{{i.title}} &nbsp;<a href="{% url 'update_review' reviewid=i.id %}">Edit</a> <a href="{% url 'delete_review' reviewid=i.id %}">Delete</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{%endblock%}
