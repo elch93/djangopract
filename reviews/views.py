@@ -1,15 +1,15 @@
 from django.shortcuts import render, HttpResponse, redirect, reverse, get_object_or_404
 from .forms import ReviewForm
-from .models import Review
+from .models import Review, Book
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 # Create your views here.
 def index(request):
     reviews = Review.objects.all()
-    return render(request, 'reviews/index.template.html',{'reviews':reviews})
+    return render(request, 'reviews/index.template.html',{'review':reviews})
 
 @login_required
-def create_review(request):
+def create_review(request, book_id):
     if request.method=="GET":
         create_form = ReviewForm()
 
@@ -19,7 +19,10 @@ def create_review(request):
         create_form = ReviewForm(request.POST)
 
         if create_form.is_valid():
-            saved_form = create_form.save()
+            saved_form = create_form.save(commit=False)
+            saved_form.user = request.user
+            saved_form.book = get_object_or_404(Book, pk=book_id)
+            saved_form.save()
             messages.success(request, f"the review '{saved_form.title}' has been created!")
             return redirect(reverse(index))
         else:

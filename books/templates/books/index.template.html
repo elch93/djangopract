@@ -13,7 +13,10 @@
     </p>
     <ul>
         {% for i in books %}
-        <li>{{i.title}} <a href="{% url 'update_book_route' dataid=i.id %}">Edit</a> <a href="{% url 'delete_book_route' dataid=i.id %}">Delete</a></li>
+        <li>{{i.title}} 
+        <a href="{% url 'view_book_details' book_id=i.id %}">{{i.title}}</a> 
+        <a href="{% url 'update_book_route' dataid=i.id %}">Edit</a> 
+        <a href="{% url 'delete_book_route' dataid=i.id %}">Delete</a></li>
         {% endfor %}
     </ul>
     <h1>Authors</h1>

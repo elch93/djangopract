@@ -3,6 +3,7 @@ from .models import Book, Author
 from .forms import BookForm, AuthorForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
+from reviews.forms import ReviewForm
 
 # Create your views here.
 def index(request):
@@ -21,7 +22,9 @@ def create_book(request):
         create_form = BookForm(request.POST)
 
         if create_form.is_valid():
-            saved_form = create_form.save()
+            saved_form = create_form.save(commit=False)
+            saved_form.user = request.user
+            saved_form.save()
             messages.success(request, f"New Book '{saved_form.title}' has been created!")
             return redirect(reverse(index))
         else:
@@ -103,3 +106,9 @@ def delete_author(request, dataid):
         return render(request, 'books/delete.template.html', {
             'form': author_to_delete
         }) 
+
+def view_book_details(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    review_form = ReviewForm()
+    return render(request, 'books/details.template.html', {'book':book,'form': review_form})
+

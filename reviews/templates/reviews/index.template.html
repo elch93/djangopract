@@ -10,11 +10,9 @@
     <p>Please <a href="../accounts/login">Login</a></p>
     {%endif%}
     {% if request.user.is_authenticated  %}
-    <p>
-        <a href="{% url 'create_review' %}">Create Review</a>
-    </p>
+  
     <ul>
-        {% for i in reviews %}
+        {% for i in review %}
         <li>{{i.title}} &nbsp;<a href="{% url 'update_review' reviewid=i.id %}">Edit</a> <a href="{% url 'delete_review' reviewid=i.id %}">Delete</a></li>
         {% endfor %}
     </ul>

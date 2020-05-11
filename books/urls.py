@@ -9,5 +9,6 @@ urlpatterns = [
     path('update_book/<dataid>', books.views.update_book, name='update_book_route'),
     path('update_author/<dataid>', books.views.update_author, name='update_author_route'),
     path('delete_book/<dataid>', books.views.delete_book, name='delete_book_route'),
-    path('delete_author/<dataid>', books.views.delete_author, name='delete_author_route')
+    path('delete_author/<dataid>', books.views.delete_author, name='delete_author_route'),
+    path('view/<book_id>', books.views.view_book_details, name = 'view_book_details')
 ]
